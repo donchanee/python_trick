@@ -1,0 +1,23 @@
+They're the magic behind a whole bunch of core Python features.
+
+When you use dotted access to look up a member (eg, x.y), Python first looks for the member in the instance dictionary. If it's not found, it looks for it in the class dictionary. If it finds it in the class dictionary, and the object implements the descriptor protocol, instead of just returning it, Python executes it. A descriptor is any class that implements the __get__, __set__, or __delete__ methods.
+
+Here's how you'd implement your own (read-only) version of property using descriptors:
+
+class Property(object):
+    def __init__(self, fget):
+        self.fget = fget
+
+    def __get__(self, obj, type):
+        if obj is None:
+            return self
+        return self.fget(obj)
+and you'd use it just like the built-in property():
+
+class MyClass(object):
+    @Property
+    def foo(self):
+        return "Foo!"
+Descriptors are used in Python to implement properties, bound methods, static methods, class methods and slots, amongst other things. Understanding them makes it easy to see why a lot of things that previously looked like Python 'quirks' are the way they are.
+
+Raymond Hettinger has an excellent tutorial that does a much better job of describing them than I do.
