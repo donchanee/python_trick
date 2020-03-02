@@ -1,0 +1,8 @@
+Dictionaries have a 'get()' method. 
+If you do d['key'] and key isn't there, you get an exception.
+If you do d.get('key'), you get back None if 'key' isn't there. 
+You can add a second argument to get that item back instead of None, eg: d.get('key', 0).
+
+It's great for things like adding up numbers:
+
+sum[value] = sum.get(value, 0) + 1
