@@ -1,0 +1,11 @@
+try:
+  put_4000000000_volts_through_it(parrot)
+except Voom:
+  print "'E's pining!"
+else:
+  print "This parrot is no more!"
+finally:
+  end_sketch()
+
+# The use of the else clause is better than adding additional code to the try clause because 
+# it avoids accidentally catching an exception that wasn’t raised by the code being protected by the try ... except statement.
